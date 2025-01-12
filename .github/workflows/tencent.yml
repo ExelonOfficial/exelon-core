@@ -1,0 +1,157 @@
+# This workflow will build a docker container, publish and deploy it to Tencent Kubernetes Engine (TKE) when there is a push to the "main" branch.
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Tencent Kubernetes Engine cluster,
+#    including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace:
+#    - TENCENT_CLOUD_SECRET_ID with Tencent Cloud secret id
+#    - TENCENT_CLOUD_SECRET_KEY with Tencent Cloud secret key
+#    - TENCENT_CLOUD_ACCOUNT_ID with Tencent Cloud account id
+#    - TKE_REGISTRY_PASSWORD with TKE registry password
+#
+# 3. Change the values for the TKE_IMAGE_URL, TKE_REGION, TKE_CLUSTER_ID and DEPLOYMENT_NAME environment variables (below).
+
+name: Tencent Kubernetes Engine
+
+on:
+  push:
+    branches: [ "main" ]
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  TKE_IMAGE_URL: ccr.ccs.tencentyun.com/demo/mywebapp
+  TKE_REGION: ap-guangzhou
+  TKE_CLUSTER_ID: cls-mywebapp
+  DEPLOYMENT_NAME: tke-test
+
+permissions:
+  contents: read
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Build
+    - name: Build Docker image
+      run: |
+        docker build -t ${TKE_IMAGE_URL}:${GITHUB_SHA} .
+
+    - name: Login TKE Registry
+      run: |
+        docker login -u ${{ secrets.TENCENT_CLOUD_ACCOUNT_ID }} -p '${{ secrets.TKE_REGISTRY_PASSWORD }}' ${TKE_IMAGE_URL}
+
+    # Push the Docker image to TKE Registry
+    - name: Publish
+      run: |
+        docker push ${TKE_IMAGE_URL}:${GITHUB_SHA}
+
+    - name: Set up Kustomize
+      run: |
+        curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+
+    - name: Set up ~/.kube/config for connecting TKE cluster
+      uses: TencentCloud/tke-cluster-credential-action@v1
+      with:
+        secret_id: ${{ secrets.TENCENT_CLOUD_SECRET_ID }}
+        secret_key: ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
+        tke_region: ${{ env.TKE_REGION }}
+        cluster_id: ${{ env.TKE_CLUSTER_ID }}
+
+    - name: Switch to TKE context
+      run: |
+        kubectl config use-context ${TKE_CLUSTER_ID}-context-default
+
+    # Deploy the Docker image to the TKE cluster
+    - name: Deploy
+      run: |
+        ./kustomize edit set image ${TKE_IMAGE_URL}:${GITHUB_SHA}
+        ./kustomize build . | kubectl apply -f -
+        kubectl rollout status deployment/${DEPLOYMENT_NAME}
+        kubectl get services -o wide
+
+            - name: Download a Build Artifact
+  uses: actions/download-artifact@v4.1.8
+  with:
+    # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+    name: # optional
+    # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
+    path: # optional
+    # A glob pattern matching the artifacts that should be downloaded. Ignored if name is specified.
+    pattern: # optional
+    # When multiple artifacts are matched, this changes the behavior of the destination directories. If true, the downloaded artifacts will be in the same directory specified by path. If false, the downloaded artifacts will be extracted into individual named directories within the specified path.
+    merge-multiple: # optional, default is false
+    # The GitHub token used to authenticate with the GitHub API. This is required when downloading artifacts from a different repository or from a different workflow run. If this is not specified, the action will attempt to download artifacts from the current repository and the current workflow run.
+    github-token: # optional
+    # The repository owner and the repository name joined together by "/". If github-token is specified, this is the repository that artifacts will be downloaded from.
+    repository: # optional, default is ${{ github.repository }}
+    # The id of the workflow run where the desired download artifact was uploaded from. If github-token is specified, this is the run that artifacts will be downloaded from.
+    run-id: # optional, default is ${{ github.run_id }}
+
+
+            - name: Setup Java JDK
+  uses: actions/setup-java@v4.6.0
+  with:
+    # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+    java-version: # optional
+    # The path to the `.java-version` file. See examples of supported syntax in README file
+    java-version-file: # optional
+    # Java distribution. See the list of supported distributions in README file
+    distribution: 
+    # The package type (jdk, jre, jdk+fx, jre+fx)
+    java-package: # optional, default is jdk
+    # The architecture of the package (defaults to the action runner's architecture)
+    architecture: # optional
+    # Path to where the compressed JDK is located
+    jdkFile: # optional
+    # Set this option if you want the action to check for the latest available version that satisfies the version spec
+    check-latest: # optional
+    # ID of the distributionManagement repository in the pom.xml file. Default is `github`
+    server-id: # optional, default is github
+    # Environment variable name for the username for authentication to the Apache Maven repository. Default is $GITHUB_ACTOR
+    server-username: # optional, default is GITHUB_ACTOR
+    # Environment variable name for password or token for authentication to the Apache Maven repository. Default is $GITHUB_TOKEN
+    server-password: # optional, default is GITHUB_TOKEN
+    # Path to where the settings.xml file will be written. Default is ~/.m2.
+    settings-path: # optional
+    # Overwrite the settings.xml file if it exists. Default is "true".
+    overwrite-settings: # optional, default is true
+    # GPG private key to import. Default is empty string.
+    gpg-private-key: # optional
+    # Environment variable name for the GPG private key passphrase. Default is $GPG_PASSPHRASE.
+    gpg-passphrase: # optional
+    # Name of the build platform to cache dependencies. It can be "maven", "gradle" or "sbt".
+    cache: # optional
+    # The path to a dependency file: pom.xml, build.gradle, build.sbt, etc. This option can be used with the `cache` option. If this option is omitted, the action searches for the dependency file in the entire repository. This option supports wildcards and a list of file names for caching multiple dependencies.
+    cache-dependency-path: # optional
+    # Workaround to pass job status to post job step. This variable is not intended for manual setting
+    job-status: # optional, default is ${{ job.status }}
+    # The token used to authenticate when fetching version manifests hosted on github.com, such as for the Microsoft Build of OpenJDK. When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.
+    token: # optional, default is ${{ github.server_url == 'https://github.com' && github.token || '' }}
+    # Name of Maven Toolchain ID if the default name of "${distribution}_${java-version}" is not wanted. See examples of supported syntax in Advanced Usage file
+    mvn-toolchain-id: # optional
+    # Name of Maven Toolchain Vendor if the default name of "${distribution}" is not wanted. See examples of supported syntax in Advanced Usage file
+    mvn-toolchain-vendor: # optional
+          
+            - name: First interaction
+  uses: actions/first-interaction@v1.3.0
+  with:
+    # Token for the repository. Can be passed in using {{ secrets.GITHUB_TOKEN }}
+    repo-token: 
+    # Comment to post on an individual's first issue
+    issue-message: # optional
+    # Comment to post on an individual's first pull request
+    pr-message: # optional
+          
+
+
+
+          
