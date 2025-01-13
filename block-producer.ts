@@ -3,7 +3,7 @@
 // Manages block validation
 // Implements finality rules
 // Coordinates block propagation
-// Handles fork resolution
+// Handles fork resolution 
 export class BlockProducer {
     private blockchain: Array<any>;
     private difficulty: number;
