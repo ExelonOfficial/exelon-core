@@ -15,7 +15,7 @@
  *****************************************************************************/
 
 #ifndef GLIDE_FRAUD_PREVENTION_HPP
-#define GLIDE_FRAUD_PREVENTION_HPP
+#define GLIDE_FRAUD_PREVENTION_HPP 
 
 #include <iostream>
 #include <vector>
