@@ -7,7 +7,7 @@
  * cross-chain verification coordination, and zero-knowledge proof integration. It also
  * includes advanced design patterns, mathematical formulas, and thorough error handling
  * to showcase the sophistication of the GLIDE blockchain platform.
-
+ 
  **************************************************************************************************/
 
 /***************************************************************************************************
