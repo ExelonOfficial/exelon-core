@@ -8,7 +8,7 @@
  * cryptographic concepts, multi-layer encryption, detailed error handling, and 
  * realistic configuration options. 
  ****************************************************************************/
-
+ 
 #pragma once
 
 #include <iostream>
