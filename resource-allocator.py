@@ -8,7 +8,7 @@ the GLIDE blockchain platform. It leverages machine learning, complex mathematic
 algorithms, and advanced design patterns to dynamically manage CPU, memory, and
 network bandwidth in real-time.
 
-Key Features:
+Key Features: 
 1. AI-driven resource prediction using sophisticated forecasting algorithms.
 2. Dynamic CPU/memory management with concurrency and adaptative load balancing.
 3. Advanced network bandwidth optimization utilizing multi-threaded scheduling.
