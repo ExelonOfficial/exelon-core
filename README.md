@@ -1,12 +1,12 @@
-# glide-core
-GLIDE Core: Advanced blockchain infrastructure implementing AI Dual Subnet architecture with parallel transaction processing.
+# Exelon-core
+Exelon Core: Advanced blockchain infrastructure implementing AI Dual Subnet architecture with parallel transaction processing.
 
 
-# glide-core
-GLIDE Core: High-performance blockchain infrastructure implementing AI Dual Subnet architecture with parallel transaction processing. Built with Rust, C++, TypeScript, and JavaScript. Features advanced computational infrastructure, real-time analytics, and AI-enhanced routing protocols powering next-generation DeFi operations.
+# Exelon-core
+Exelon Core: High-performance blockchain infrastructure implementing AI Dual Subnet architecture with parallel transaction processing. Built with Rust, C++, TypeScript, and JavaScript. Features advanced computational infrastructure, real-time analytics, and AI-enhanced routing protocols powering next-generation DeFi operations.
 
 
-GLIDE Core
+Exelon Core
 Advanced blockchain infrastructure implementing AI Dual Subnet architecture with parallel transaction processing.
 🚀 Features
 
@@ -81,8 +81,8 @@ pip3 install \
 
 3. Core Installation
 # Clone repository with submodules
-git clone --recursive https://github.com/GlideResearchAI/glide-core.git
-cd glide-core
+git clone --recursive https://github.com/ExelonResearchAI/Exelon-core.git
+cd Exelon-core
 
 # Install Rust dependencies
 cargo install --force cbindgen
@@ -116,7 +116,7 @@ python3 -c "import torch; print(torch.cuda.is_available())"
 
 
 5. Configuration
-Create configuration file at ~/.glide/config.toml:
+Create configuration file at ~/.Exelon/config.toml:
 
 [subnet]
 max_parallel_threads = 32
