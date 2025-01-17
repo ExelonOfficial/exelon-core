@@ -1,5 +1,5 @@
 """
-GLIDE Blockchain Platform - AI Dual Subnets, Voice Recognition, and Advanced Swap Protocols
+AI Dual Subnets, Voice Recognition, and Advanced Swap Protocols
 -----------------------------------------------------------------------------------------
 ResourceAllocator Module
 
