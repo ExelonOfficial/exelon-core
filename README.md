@@ -81,7 +81,7 @@ pip3 install \
 
 3. Core Installation
 # Clone repository with submodules
-git clone --recursive https://github.com/ExelonResearchAI/Exelon-core.git
+git clone --recursive https://github.com/ExelonOfficial/Exelon-core.git
 cd Exelon-core
 
 # Install Rust dependencies
