@@ -1,5 +1,5 @@
 /****************************************************************************
- * GLIDE AI Dual Subnet Blockchain Platform
+ * AI Dual Subnet Blockchain Platform
  * Encryption Module for Secure Communication, Key Distribution, and Multi-Layer
  * Encryption with AI-Driven Voice Recognition and Advanced Swap Protocols.
  *
