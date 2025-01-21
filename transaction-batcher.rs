@@ -1,9 +1,3 @@
-/******************************************************************************
- * GLIDE PLATFORM: AI-Dual Subnet Blockchain, Voice Interaction & Advanced Swaps
- ******************************************************************************/
-
-//! GLIDE: AI-Dual Subnet Blockchain Platform 
-//! 
 //! Features:
 //! - Complex transaction batching
 //! - AI-based subnets for advanced processing
