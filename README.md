@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![SLIP Core](https://via.placeholder.com/150)
+![SLIP Core](https://cdn.discordapp.com/attachments/960748970123100204/1331375531647701034/slip_logo.jpg?ex=67916396&is=67901216&hm=cb4dc616550f80d5d0f7aa8361d3d610c4730f55594f4ff7893678fb489c1477&)
 
 [![Build Status](https://img.shields.io/github/workflow/status/SlipResearchAI/slip-core/CI)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
