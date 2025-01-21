@@ -3,8 +3,8 @@ AI Dual Subnets, Voice Recognition, and Advanced Swap Protocols
 -----------------------------------------------------------------------------------------
 ResourceAllocator Module
 
-The ResourceAllocator module is designed to predict, allocate, and optimize resources across
-the GLIDE blockchain platform. It leverages machine learning, complex mathematical
+The ResourceAllocator module is designed to predict, allocate, and optimize 
+resources. It leverages machine learning, complex mathematical
 algorithms, and advanced design patterns to dynamically manage CPU, memory, and
 network bandwidth in real-time.
 
