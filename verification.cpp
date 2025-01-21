@@ -1,12 +1,10 @@
 /***************************************************************************************************
- * GLIDE Blockchain Platform - AI Dual Subnets, Voice Recognition & Advanced Swap Protocols
- * 
  * Verification Module
  * 
  * This module is responsible for complex consensus verification, signature verification,
  * cross-chain verification coordination, and zero-knowledge proof integration. It also
  * includes advanced design patterns, mathematical formulas, and thorough error handling
- * to showcase the sophistication of the GLIDE blockchain platform.
+ * to showcase the sophistication of the blockchain.
  
  **************************************************************************************************/
 
