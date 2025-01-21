@@ -1,7 +1,5 @@
 /****************************************************************************
- * GLIDE Fault Tolerance Subsystem
- * 
- * The following code belongs to the GLIDE blockchain platform, featuring
+ * The following code belongs to the platform, featuring
  * AI Dual Subnets, voice recognition integration for blockchain interactions,
  * and advanced swap protocols. This subsystem handles fault tolerance by
  * providing complex redundancy mechanisms, node failure recovery, state
