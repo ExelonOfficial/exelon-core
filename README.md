@@ -14,7 +14,7 @@
 
 [Documentation](https://docs.slipai.io) |
 [Architecture](https://docs.slipai.io/architecture) |
-[Contributing](https://github.com/SlipOfficial/slip-ai-core/fork)) |
+[Contributing](https://github.com/SlipOfficial/slip-ai-core/fork) |
 [Security](https://github.com/SlipOfficial/slip-ai-core/issues)
 
 </div>
